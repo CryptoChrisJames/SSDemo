@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSImplementation.Data;
 using SSImplementation.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace SSImplementation.Controllers
 {
     public class ProfilesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<ApplicationUser> _userManager;
 
-        public ProfilesController(ApplicationDbContext context)
+        public ProfilesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;    
+            _context = context;
+            _userManager = userManager;
         }
 
         // GET: Profiles
@@ -68,12 +71,13 @@ namespace SSImplementation.Controllers
         // GET: Profiles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(User);
             if (id == null)
             {
                 return NotFound();
             }
 
-            var profile = await _context.Profiles.SingleOrDefaultAsync(m => m.ID == id);
+            var profile = await _context.Profiles.SingleOrDefaultAsync(m => m.ID == currentUser.ProfileID);
             if (profile == null)
             {
                 return NotFound();
