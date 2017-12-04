@@ -75,17 +75,9 @@ namespace SSImplementation.Controllers
             profile.ProfilePicture = filename;
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(profile);
-                    _context.SaveChanges();
-                }
-                catch(DbUpdateConcurrencyException ex)
-                {
-                    var entry = ex.Entries.Single();
-                    entry.OriginalValues.SetValues(entry.GetDatabaseValues());
-                }
-                   
+             
+                _context.Add(profile);
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Dashboard");
             }
             return View(profile);
