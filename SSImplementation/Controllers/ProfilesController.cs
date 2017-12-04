@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using SSImplementation.Data;
 using SSImplementation.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace SSImplementation.Controllers
 {
@@ -15,11 +18,13 @@ namespace SSImplementation.Controllers
     {
         private readonly ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager;
+        private IHostingEnvironment _environment;
 
-        public ProfilesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ProfilesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHostingEnvironment environment)
         {
             _context = context;
             _userManager = userManager;
+            _environment = environment;
         }
 
         // GET: Profiles
@@ -57,13 +62,31 @@ namespace SSImplementation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,DisplayName,FirstName,LastName,Gender,DateofBirth,Email,PhoneNumber,Address,State,ZipCode,City,ProfilePicture,Bio")] Profile profile)
+        public async Task<IActionResult> Create([Bind("ID,DisplayName,FirstName,LastName,Gender,DateofBirth,Email,PhoneNumber,Address,State,ZipCode,City,ProfilePicture,Bio,ProfilePictureFile")] Profile profile, IFormFile ProfilePictureFile)
         {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(User);
+            string uploadPath = Path.Combine(_environment.WebRootPath, "ProfilePictures");
+            Directory.CreateDirectory(Path.Combine(uploadPath, currentUser.Id));
+            string filename = Path.GetFileName(ProfilePictureFile.FileName);
+            using (FileStream fs = new FileStream(Path.Combine(uploadPath, currentUser.Id, filename), FileMode.Create))
+            {
+                await ProfilePictureFile.CopyToAsync(fs);
+            }
+            profile.ProfilePicture = filename;
             if (ModelState.IsValid)
             {
-                _context.Add(profile);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                try
+                {
+                    _context.Update(profile);
+                    _context.SaveChanges();
+                }
+                catch(DbUpdateConcurrencyException ex)
+                {
+                    var entry = ex.Entries.Single();
+                    entry.OriginalValues.SetValues(entry.GetDatabaseValues());
+                }
+                   
+                return RedirectToAction("Index", "Dashboard");
             }
             return View(profile);
         }

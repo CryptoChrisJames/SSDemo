@@ -1,13 +1,17 @@
-﻿@{ 
+﻿@model SSImplementation.Models.Profile
+
+@{ 
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
+
+
 
 <div>
     <div class="container-fluid">
         <div id="DashboardColumns" class="row content">
             <div class="col-sm-3">
-                <img id="DashboardProfilePicture" src="~/images/SiteImages/Man.png"/>
+                <img id="DashboardProfilePicture" src="~/ProfilePictures/@Model.User.Id/@Model.ProfilePicture"/>
                 <div>
                     <input type="button" class="btn btn-dashboard" value="View Your Profile" onclick="location.href = '/Profiles'">
                 </div>
