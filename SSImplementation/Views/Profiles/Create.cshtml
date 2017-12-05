@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-<form asp-action="Create" enctype="multipart/form-data">
+<form asp-action="Create">
     <div class="form-horizontal">
         <h4>Profile</h4>
         <hr />
@@ -35,14 +35,14 @@
         <div class="form-group">
             <label asp-for="Gender" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<SSImplementation.Models.GenderType>()" class="form-control"></select>
+                <select asp-for="Gender" class="form-control"></select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="DateofBirth" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input type="date" asp-for="DateofBirth" class="form-control" />
+                <input asp-for="DateofBirth" class="form-control" />
                 <span asp-validation-for="DateofBirth" class="text-danger"></span>
             </div>
         </div>
@@ -70,7 +70,7 @@
         <div class="form-group">
             <label asp-for="State" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="State" asp-items="Html.GetEnumSelectList<SSImplementation.Models.USStates>()" class="form-control"></select>
+                <select asp-for="State" class="form-control"></select>
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
         </div>
@@ -90,18 +90,15 @@
         </div>
         <div class="form-group">
             <label asp-for="ProfilePicture" class="col-md-2 control-label"></label>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input type="file" name="ProfilePictureFile" />
+                <input asp-for="ProfilePicture" class="form-control" />
                 <span asp-validation-for="ProfilePicture" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Bio" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <textarea asp-for="Bio" class="form-control"> </textarea>
+                <input asp-for="Bio" class="form-control" />
                 <span asp-validation-for="Bio" class="text-danger"></span>
             </div>
         </div>

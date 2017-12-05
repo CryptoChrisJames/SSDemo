@@ -11,9 +11,9 @@
     <div class="container-fluid">
         <div id="DashboardColumns" class="row content">
             <div class="col-sm-3">
-                <img id="DashboardProfilePicture" src="~/ProfilePictures/@Model.User.Id/@Model.ProfilePicture"/>
-                <div>
-                    <input type="button" class="btn btn-dashboard" value="View Your Profile" onclick="location.href = '/Profiles'">
+                    <img id="DashboardProfilePicture" src="~/ProfilePictures/@Model.User.Id/@Model.ProfilePicture"/>
+                <div id="ViewProfileLink">
+                    <a asp-action="Details" asp-controller="Profiles">View Your Profile</a>
                 </div>
             </div>
             <div class="col-sm-9">

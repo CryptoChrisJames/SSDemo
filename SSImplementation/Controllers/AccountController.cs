@@ -124,7 +124,7 @@ namespace SSImplementation.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToAction("Create","Profiles");
+                    return RedirectToAction("Edit","Profiles");
                 }
                 AddErrors(result);
             }
