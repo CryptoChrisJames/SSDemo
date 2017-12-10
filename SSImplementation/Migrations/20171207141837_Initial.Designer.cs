@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using SSImplementation.Data;
 using SSImplementation.Models;
 
-namespace SSImplementation.Data.Migrations
+namespace SSImplementation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171122203816_profiles")]
-    partial class profiles
+    [Migration("20171207141837_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -171,36 +171,35 @@ namespace SSImplementation.Models
 
     public class Profile
     {
-        public static string blank = "";
         
         public int ID { get; set; }
 
-        public string DisplayName { get; set; } = blank;
+        public string DisplayName { get; set; } 
 
-        public string FirstName { get; set; } = blank;
+        public string FirstName { get; set; } 
 
-        public string LastName { get; set; } = blank;
+        public string LastName { get; set; } 
 
         public GenderType Gender { get; set; }
 
-        public string Email { get; set; } = blank;
+        public string Email { get; set; } 
 
-        public string PhoneNumber { get; set; } = blank;
+        public string PhoneNumber { get; set; } 
 
         public DateTime DateofBirth { get; set; }
 
-        public string Address { get; set; } = blank;
+        public string Address { get; set; } 
 
         public USStates State { get; set; }
 
         public int ZipCode { get; set; } 
 
-        public string City { get; set; } = blank;
+        public string City { get; set; } 
 
         [Display(Name = "Profile Picture")]
-        public string ProfilePicture { get; set; } = blank;
+        public string ProfilePicture { get; set; } 
 
-        public string Bio { get; set; } = blank;
+        public string Bio { get; set; } 
 
         public ApplicationUser User { get; set; }
 

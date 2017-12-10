@@ -27,19 +27,23 @@ namespace SSImplementation.Controllers
             _environment = environment;
         }
 
-        
         // GET: Profiles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(User);
-            var profile = await _context.Profiles.SingleOrDefaultAsync(m => m.ID == currentUser.ProfileID);
+            var profile = await _context.Profiles
+                .SingleOrDefaultAsync(m => m.ID == currentUser.ProfileID);
             return View(profile);
         }
+
+        
+
         // GET: Profiles/Edit/5
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(User);
-            var profile = await _context.Profiles.SingleOrDefaultAsync(m => m.ID == currentUser.ProfileID);
+            var profile = await _context.Profiles
+                .SingleOrDefaultAsync(m => m.ID == currentUser.ProfileID);
             return View(profile);
         }
 
@@ -48,31 +52,33 @@ namespace SSImplementation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("ID,DisplayName,FirstName,LastName,Gender,DateofBirth,Email,PhoneNumber,Address,State,ZipCode,City,ProfilePicture,Bio,ProfilePictureFile")] Profile profile, IFormFile ProfilePictureFile)
+        public async Task<IActionResult> Edit(int? id, 
+            [Bind("ID,DisplayName,FirstName,LastName,Gender,Email,PhoneNumber," +
+            "DateofBirth,Address,State,ZipCode,City,ProfilePicture,Bio," +
+            "ProfilePictureFile")] Profile profile, IFormFile ProfilePictureFile)
         {
-
+            ApplicationUser currentUser = await _userManager.GetUserAsync(User);
             if (ModelState.IsValid)
             {
-                ApplicationUser currentUser = await _userManager.GetUserAsync(User);
-                if(ProfilePictureFile != null)
-                {
-                    string uploadPath = Path.Combine(_environment.WebRootPath, "ProfilePictures");
 
-                    Directory.CreateDirectory(Path.Combine(uploadPath, currentUser.Id));
-                    string filename = ProfilePictureFile.FileName;
-                    using (FileStream fs = new FileStream(Path.Combine(uploadPath, currentUser.Id, filename), FileMode.Create))
+                if (ProfilePictureFile != null)
+                {
+                    string uploadpath = Path.Combine(_environment.WebRootPath, "ProfilePictures");
+                    Directory.CreateDirectory(Path.Combine(uploadpath, currentUser.Id));
+                    string filename = Path.GetFileName(ProfilePictureFile.FileName);
+                    using (FileStream fs = new FileStream(Path.Combine(uploadpath, currentUser.Id, filename), FileMode.Create))
                     {
                         await ProfilePictureFile.CopyToAsync(fs);
                     }
                     profile.ProfilePicture = filename;
-
                 }
                 _context.Update(profile);
                 await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Dashboard");
             }
-            RedirectToAction("Index", "Dashboard");
             return View(profile);
         }
+
         
     }
 }

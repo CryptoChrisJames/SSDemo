@@ -11,7 +11,14 @@
     <div class="container-fluid">
         <div id="DashboardColumns" class="row content">
             <div class="col-sm-3">
+                @if (Model.ProfilePicture != null)
+                {
                     <img id="DashboardProfilePicture" src="~/ProfilePictures/@Model.User.Id/@Model.ProfilePicture"/>
+                }
+                else
+                { 
+                    <img id="DashboardProfilePicture" src="~/images/SiteImages/Man.png"/>
+                }
                 <div id="ViewProfileLink">
                     <a asp-action="Details" asp-controller="Profiles">View Your Profile</a>
                 </div>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using SSImplementation.Data;
 using SSImplementation.Models;
 
-namespace SSImplementation.Data.Migrations
+namespace SSImplementation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
