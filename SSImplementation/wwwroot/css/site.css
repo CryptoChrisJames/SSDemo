@@ -317,6 +317,16 @@ textarea {
     height: auto;
 }
 
+.ProfileHeader{
+    padding:2em;
+}
+.ProfilePagePicture{
+    display:block;
+    margin: 0 auto; 
+    height:337px;
+    width:auto;
+}
+
 
 
 /*---------------Alternate theme Elements---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/   
