@@ -1,4 +1,4 @@
-﻿body {
+﻿body{
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -293,7 +293,7 @@ textarea {
     padding-top:2em;
 }
 
-#DashboardPanels{
+#DashboardPanels, #ProfilePanels{
     padding:2em;
 }
 
@@ -317,16 +317,26 @@ textarea {
     height: auto;
 }
 
-.ProfileHeader{
-    padding:2em;
-}
+
 .ProfilePagePicture{
     display:block;
     margin: 0 auto; 
-    height:337px;
-    width:auto;
+    width:300px;
+    height:auto;
+    border:solid;
+    border-color:#000000;
+    border-width:15px;
+    border-radius:50%;
+}
+.ProfileName{
+    font-family:'Trebuchet MS';
+    font-size:3em;
+    text-align:center;
 }
 
+.ProfilePanelHeading{
+    text-align:center;
+}
 
 
 /*---------------Alternate theme Elements---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/   

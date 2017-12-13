@@ -7,9 +7,61 @@
 
 
 <div>
-    <section class="ProfileHeader">
-        <div class="row">
-            <img class="ProfilePagePicture" src="~/ProfilePictures/@Model.User.Id/@Model.ProfilePicture"/>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="ProfileName">
+                    <p>@Model.DisplayName</p>
+                </div>
+                <div>
+                    <img class="ProfilePagePicture" src="~/ProfilePictures/@Model.User.Id/@Model.ProfilePicture" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-3" id="ProfilePanels">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="ProfilePanelHeading">Info</p>
+                        </div>
+                        <div class="panel-body">
+                            <div class="container">
+                                <p><b>Owner's Name:</b> @Model.FirstName @Model.LastName</p>
+                                <p><b>Email:</b> @Model.Email</p>
+                                <p><b>Area:</b> @Model.City,@Model.State @Model.ZipCode</p>
+                                <p><b>Rating:</b> -/-  </p> @*<-------------------Place holder until rating system is developed. ------------>*@
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-6" id="ProfilePanels">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="ProfilePanelHeading">Current Listings</p>
+                        </div>
+                        <div class="panel-body">
+                            <div class="container"><p>No listings are available at this time.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3" id="ProfilePanels">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <p class="ProfilePanelHeading">Activity</p>
+                        </div>
+                        <div class="panel-body">
+                            <div class="container">
+                                <p>No activity is available at this time.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
