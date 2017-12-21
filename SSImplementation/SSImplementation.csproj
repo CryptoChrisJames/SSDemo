@@ -19,6 +19,10 @@
 
   <ItemGroup>
     <None Remove="Properties\PublishProfiles\SSImplementation20171109121536 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\SSImplementation20171212053815 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\SSImplementation20171215052046 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\SSImplementation20171215113228 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\SSImplementation20171216102905 - Web Deploy.pubxml" />
   </ItemGroup>
 
 
