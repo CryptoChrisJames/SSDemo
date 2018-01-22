@@ -9,7 +9,6 @@ namespace SSImplementation.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            return;
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -114,6 +113,37 @@ namespace SSImplementation.Migrations
                         principalTable: "Profiles",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudioListings",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address = table.Column<string>(nullable: true),
+                    CancellationFee = table.Column<int>(nullable: false),
+                    City = table.Column<string>(nullable: true),
+                    ListingDescription = table.Column<string>(nullable: true),
+                    PricePerHour = table.Column<int>(nullable: false),
+                    ProfileID = table.Column<int>(nullable: true),
+                    State = table.Column<int>(nullable: false),
+                    StudioName = table.Column<string>(nullable: true),
+                    StudioRules = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false),
+                    isAvailable = table.Column<bool>(nullable: false),
+                    numberOfRooms = table.Column<int>(nullable: false),
+                    pictureOfRoom = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudioListings", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_StudioListings_Profiles_ProfileID",
+                        column: x => x.ProfileID,
+                        principalTable: "Profiles",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,6 +253,11 @@ namespace SSImplementation.Migrations
                 table: "AspNetUsers",
                 column: "ProfileID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudioListings_ProfileID",
+                table: "StudioListings",
+                column: "ProfileID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -241,6 +276,9 @@ namespace SSImplementation.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "StudioListings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

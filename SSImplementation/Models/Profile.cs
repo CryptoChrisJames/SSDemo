@@ -203,5 +203,7 @@ namespace SSImplementation.Models
 
         public ApplicationUser User { get; set; }
 
+        public ICollection<StudioListingDTO> StudioListings { get; set; }
+
     }
 }

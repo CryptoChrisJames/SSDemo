@@ -24,5 +24,6 @@ namespace SSImplementation.Data
         }
 
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<StudioListingDTO> StudioListings { get; set; }
     }
 }

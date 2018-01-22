@@ -215,6 +215,44 @@ namespace SSImplementation.Migrations
                     b.ToTable("Profiles");
                 });
 
+            modelBuilder.Entity("SSImplementation.Models.StudioListingDTO", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<int>("CancellationFee");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("ListingDescription");
+
+                    b.Property<int>("PricePerHour");
+
+                    b.Property<int?>("ProfileID");
+
+                    b.Property<int>("State");
+
+                    b.Property<string>("StudioName");
+
+                    b.Property<string>("StudioRules");
+
+                    b.Property<int>("Type");
+
+                    b.Property<bool>("isAvailable");
+
+                    b.Property<int>("numberOfRooms");
+
+                    b.Property<string>("pictureOfRoom");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("StudioListings");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -258,6 +296,13 @@ namespace SSImplementation.Migrations
                         .WithOne("User")
                         .HasForeignKey("SSImplementation.Models.ApplicationUser", "ProfileID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SSImplementation.Models.StudioListingDTO", b =>
+                {
+                    b.HasOne("SSImplementation.Models.Profile")
+                        .WithMany("StudioListings")
+                        .HasForeignKey("ProfileID");
                 });
         }
     }

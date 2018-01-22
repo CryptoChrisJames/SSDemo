@@ -15,6 +15,5 @@ namespace SSImplementation.Models
 
         public Profile Profile { get; set; }
 
-
     }
 }
