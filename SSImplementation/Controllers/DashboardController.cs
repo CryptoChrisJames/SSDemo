@@ -7,6 +7,7 @@ using SSImplementation.Data;
 using Microsoft.AspNetCore.Identity;
 using SSImplementation.Models;
 using Microsoft.EntityFrameworkCore;
+using SSImplementation.Models.ViewModels;
 
 namespace SSImplementation.Controllers
 {
@@ -20,13 +21,18 @@ namespace SSImplementation.Controllers
             _context = context;
             _userManager = userManager;
         }
+        
 
         // GET: /Dashboard/Index
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(User);
-            var profile = await _context.Profiles.SingleOrDefaultAsync(m => m.ID == currentUser.ProfileID);
-            return View(profile); 
+            DashboardViewModel DBVM = new DashboardViewModel();
+            DBVM.ProfileData = await _context.Profiles
+                .SingleOrDefaultAsync(m => m.ID == currentUser.ProfileID);
+            DBVM.StudioData = await _context.StudioListings
+                .SingleOrDefaultAsync(m => m.ID == currentUser.StudioID);
+            return View(DBVM);
         }
     }
 }

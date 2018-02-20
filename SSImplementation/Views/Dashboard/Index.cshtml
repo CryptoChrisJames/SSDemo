@@ -1,4 +1,4 @@
-﻿@model SSImplementation.Models.Profile
+﻿@model SSImplementation.Models.ViewModels.DashboardViewModel
 
 @{ 
     ViewData["Title"] = "Dashboard";
@@ -11,9 +11,10 @@
     <div class="container-fluid">
         <div id="DashboardColumns" class="row content">
             <div class="col-sm-3">
-                @if (Model.ProfilePicture != null)
+                @if (Model.ProfileData.ProfilePicture != null)
                 {
-                    <img id="DashboardProfilePicture" src="~/ProfilePictures/@Model.User.Id/@Model.ProfilePicture"/>
+                    <img id="DashboardProfilePicture" 
+                         src="~/ProfilePictures/@Model.ProfileData.User.Id/@Model.ProfileData.ProfilePicture"/>
                 }
                 else
                 { 
@@ -29,7 +30,7 @@
                         Notifications
                     </div>
                     <div class="panel-body">
-                        <h4>No Notifications</h4>
+                        <h4 align="center">No Notifications</h4>
                     </div>
                 </div>
                 <div class="panel">
@@ -50,12 +51,31 @@
                         Listings
                     </div>
                     <div class="panel-body">
-                        <ul>
-                            <li>Listing</li>
-                            <li>Listing</li>
-                            <li>Listing</li>
-                            <li>Listing</li>
-                        </ul>
+                        @if (Model.StudioData.pictureOfRoom == null)
+                        {
+                            <p align="center"> Your studio listing has not been setup yet.</p>
+                        }
+                        else
+                        {
+                            <table class="ListingTable" align="center">
+                                <tr align="center">
+                                    <td style="width:177px; height:auto;">
+                                        <img class="ListingTableImage"
+                                             src="~/StudioPictures/@Model.StudioData.User.Id/@Model.StudioData.pictureOfRoom" />
+                                    </td>
+                                    <td>
+                                        @Model.StudioData.StudioName
+                                    </td>
+                                    <td>
+                                        <P align="center">@Model.StudioData.Address</P>
+                                        <p align="center">@Model.StudioData.City, @Model.StudioData.State</p>
+                                    </td>
+                                    <td>
+                                        <p align="center">$@Model.StudioData.PricePerHour/hr</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
                     </div>
                 </div>
             </div>

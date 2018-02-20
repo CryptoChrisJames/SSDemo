@@ -9,8 +9,8 @@ using SSImplementation.Models;
 namespace SSImplementation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180114220659_Initial")]
-    partial class Initial
+    [Migration("20180219002456_InitialV1.1")]
+    partial class InitialV11
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,6 +160,8 @@ namespace SSImplementation.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<int>("StudioID");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
@@ -175,6 +177,9 @@ namespace SSImplementation.Migrations
                         .HasName("UserNameIndex");
 
                     b.HasIndex("ProfileID")
+                        .IsUnique();
+
+                    b.HasIndex("StudioID")
                         .IsUnique();
 
                     b.ToTable("AspNetUsers");
@@ -216,7 +221,7 @@ namespace SSImplementation.Migrations
                     b.ToTable("Profiles");
                 });
 
-            modelBuilder.Entity("SSImplementation.Models.StudioListingDTO", b =>
+            modelBuilder.Entity("SSImplementation.Models.Studio", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -230,8 +235,6 @@ namespace SSImplementation.Migrations
                     b.Property<string>("ListingDescription");
 
                     b.Property<int>("PricePerHour");
-
-                    b.Property<int?>("ProfileID");
 
                     b.Property<int>("State");
 
@@ -248,8 +251,6 @@ namespace SSImplementation.Migrations
                     b.Property<string>("pictureOfRoom");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ProfileID");
 
                     b.ToTable("StudioListings");
                 });
@@ -297,13 +298,11 @@ namespace SSImplementation.Migrations
                         .WithOne("User")
                         .HasForeignKey("SSImplementation.Models.ApplicationUser", "ProfileID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
 
-            modelBuilder.Entity("SSImplementation.Models.StudioListingDTO", b =>
-                {
-                    b.HasOne("SSImplementation.Models.Profile")
-                        .WithMany("StudioListings")
-                        .HasForeignKey("ProfileID");
+                    b.HasOne("SSImplementation.Models.Studio", "Studio")
+                        .WithOne("User")
+                        .HasForeignKey("SSImplementation.Models.ApplicationUser", "StudioID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

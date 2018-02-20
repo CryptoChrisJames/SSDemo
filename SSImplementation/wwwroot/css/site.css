@@ -976,3 +976,42 @@ a.nivo-prevNav {
         background: #007299;
         box-shadow: none;
     }
+
+/**************************************CurrentListing Panel********************************/
+
+#CurrentListingsContainer {
+    padding-top: 2.5em;
+}
+
+#CurrentListingsContainer .panel{
+    height:500px;
+}
+
+.listingbutton {
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#CurrentListingsOptions {
+    padding-top: 1em;
+}
+
+.ListingTable {
+    width: 100%;
+    align-content:center;
+    font-family:Meiryo;
+    padding:2em;
+    table-layout:auto;
+}
+.ListingTableImage{
+    height:120px;
+    width:177px;
+}

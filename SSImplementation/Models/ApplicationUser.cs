@@ -12,8 +12,9 @@ namespace SSImplementation.Models
     {
         [ForeignKey("Profile")]
         public int ProfileID { get; set; }
-
         public Profile Profile { get; set; }
-
+        [ForeignKey("Studio")]
+        public int StudioID { get; set; }
+        public Studio Studio { get; set; }
     }
 }

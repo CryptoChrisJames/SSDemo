@@ -54,6 +54,7 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\StudioPictures\" />
   </ItemGroup>
 
 </Project>

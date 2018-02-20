@@ -112,7 +112,7 @@ namespace SSImplementation.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Profile = new Models.Profile()};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Profile = new Models.Profile(), Studio = new Models.Studio() };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace SSImplementation.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialV11 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,6 +63,30 @@ namespace SSImplementation.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StudioListings",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address = table.Column<string>(nullable: true),
+                    CancellationFee = table.Column<int>(nullable: false),
+                    City = table.Column<string>(nullable: true),
+                    ListingDescription = table.Column<string>(nullable: true),
+                    PricePerHour = table.Column<int>(nullable: false),
+                    State = table.Column<int>(nullable: false),
+                    StudioName = table.Column<string>(nullable: true),
+                    StudioRules = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false),
+                    isAvailable = table.Column<bool>(nullable: false),
+                    numberOfRooms = table.Column<int>(nullable: false),
+                    pictureOfRoom = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudioListings", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -101,6 +125,7 @@ namespace SSImplementation.Migrations
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     ProfileID = table.Column<int>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
+                    StudioID = table.Column<int>(nullable: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
@@ -113,37 +138,12 @@ namespace SSImplementation.Migrations
                         principalTable: "Profiles",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StudioListings",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Address = table.Column<string>(nullable: true),
-                    CancellationFee = table.Column<int>(nullable: false),
-                    City = table.Column<string>(nullable: true),
-                    ListingDescription = table.Column<string>(nullable: true),
-                    PricePerHour = table.Column<int>(nullable: false),
-                    ProfileID = table.Column<int>(nullable: true),
-                    State = table.Column<int>(nullable: false),
-                    StudioName = table.Column<string>(nullable: true),
-                    StudioRules = table.Column<string>(nullable: true),
-                    Type = table.Column<int>(nullable: false),
-                    isAvailable = table.Column<bool>(nullable: false),
-                    numberOfRooms = table.Column<int>(nullable: false),
-                    pictureOfRoom = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudioListings", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_StudioListings_Profiles_ProfileID",
-                        column: x => x.ProfileID,
-                        principalTable: "Profiles",
+                        name: "FK_AspNetUsers_StudioListings_StudioID",
+                        column: x => x.StudioID,
+                        principalTable: "StudioListings",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -255,9 +255,10 @@ namespace SSImplementation.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudioListings_ProfileID",
-                table: "StudioListings",
-                column: "ProfileID");
+                name: "IX_AspNetUsers_StudioID",
+                table: "AspNetUsers",
+                column: "StudioID",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -278,9 +279,6 @@ namespace SSImplementation.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "StudioListings");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -288,6 +286,9 @@ namespace SSImplementation.Migrations
 
             migrationBuilder.DropTable(
                 name: "Profiles");
+
+            migrationBuilder.DropTable(
+                name: "StudioListings");
         }
     }
 }
