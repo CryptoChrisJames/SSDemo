@@ -182,6 +182,7 @@ namespace SSImplementation.Models
         public string ListingDescription { get; set; }
         public USStates State { get; set; }
         public string City { get; set; }
+        public int ZipCode { get; set; }
         public int numberOfRooms { get; set; }
         public string pictureOfRoom { get; set; }
         public string StudioName { get; set; }

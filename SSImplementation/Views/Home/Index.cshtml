@@ -15,38 +15,8 @@
         <h2>Your Premiere Audio Studio Listings Provider</h2>
     </div>
     <div class="row" style="padding-bottom:2em;" >
-        <form class="form-inline" role="form">
-            <h4>Start Your Studio Search Here</h4>
-            <div class="row">
-                <div class="form-group col-sm-3">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw">Where</i></span>
-                        <input type="text" class="form-control" placeholder="Address, City, or ZIP" />
-                    </div>
-                </div>
-                <div class="form-group col-sm-3">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-key fa-fw">When</i></span>
-                        <input type="datetime-local" class="form-control" placeholder="Date and Time" />
-                    </div>
-                </div>
-                <div class="form-group col-sm-3">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw">Type</i></span>
-                        <select>
-                            <option value="value">Vocal</option>
-                            <option value="value">Instrumental</option>
-                            <option value="value">Live</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-sm-3"><button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </div>
-            </form>
-        </div>
+        @{await Html.RenderPartialAsync("/Views/Home/Search.cshtml", new SSImplementation.Models.ViewModels.SearchStudioViewModel());}
+    </div>
     <div class="clear"></div>
     <div class="container-fluid" id="carousel" style="padding-top:4em">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -56,7 +26,6 @@
                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
             </ol>
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
@@ -80,7 +49,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
