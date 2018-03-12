@@ -1015,3 +1015,28 @@ a.nivo-prevNav {
     height:120px;
     width:177px;
 }
+
+
+/**************************************Search Results CSS********************************/
+
+.SearchResultAmount {
+    width:50%;
+    margin: 0 auto;
+    
+}
+
+.ResultContainer {
+    padding-left:200px;
+    padding-bottom:50px;
+    padding-right:200px;
+}
+
+.ResultEntry {
+    background-color: lightgray;
+    border: solid;
+}
+
+.SearchResultsPicture{
+    height:165px;
+    width:250px;
+}

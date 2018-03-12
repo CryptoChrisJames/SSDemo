@@ -15,6 +15,7 @@ namespace SSImplementation.Models.ViewModels
         public int StudioPrice { get; set; }
         public string StudioDescription { get; set; }
         public string StudioPicture { get; set; }
+        public string UserID { get; set; }
 
     }
 }
