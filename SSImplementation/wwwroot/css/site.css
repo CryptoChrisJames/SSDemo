@@ -1040,3 +1040,11 @@ a.nivo-prevNav {
     height:165px;
     width:250px;
 }
+
+
+/**************************************Studio Listing CSS********************************/
+.StudioListingPagePicture{
+    position:center;
+    width:500px;
+    height:auto;
+}

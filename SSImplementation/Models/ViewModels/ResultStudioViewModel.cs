@@ -16,6 +16,7 @@ namespace SSImplementation.Models.ViewModels
         public string StudioDescription { get; set; }
         public string StudioPicture { get; set; }
         public string UserID { get; set; }
+        public int ZipCode { get; set; }
 
     }
 }

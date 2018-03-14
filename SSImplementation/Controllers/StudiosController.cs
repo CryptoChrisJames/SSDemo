@@ -31,19 +31,13 @@ namespace SSImplementation.Controllers
         // GET: Studios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var studio = await _context.StudioListings
+            var SelectedStudio = await _context.StudioListings
                 .SingleOrDefaultAsync(m => m.ID == id);
-            if (studio == null)
-            {
-                return NotFound();
-            }
-
-            return View();
+            SelectedStudio.User = await _context.Users
+                .SingleOrDefaultAsync(m => m.StudioID == SelectedStudio.ID);
+            SelectedStudio.User.Profile = await _context.Profiles
+                .SingleOrDefaultAsync(m => m.User == SelectedStudio.User);
+            return View(SelectedStudio);
         }
 
         

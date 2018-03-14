@@ -67,7 +67,7 @@ namespace SSImplementation.Controllers
                           StudioPicture = p.pictureOfRoom,
                           StudioDescription = p.ListingDescription,
                           UserID = p.User.Id,
-                          
+                          ZipCode=p.ZipCode,
                       }
                       ).ToList();
                       

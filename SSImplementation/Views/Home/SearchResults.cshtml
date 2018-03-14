@@ -19,9 +19,22 @@
                 {
                     <div class="ResultContainer">
                         <div class="ResultEntry">
+                            <h1>Name: <b>@item.StudioName</b></h1>
                             <img class="SearchResultsPicture" src="~/StudioPictures/@item.UserID/@item.StudioPicture" />
-                            <h1>Studio Name: <b>@item.StudioName</b></h1>
-                            <p><b>Description: </b>@item.StudioDescription</p>
+                            <div class="row">
+                                <div class="container-fluid">
+                                    <div class="col-sm-4">
+                                        <p><b>Description: </b>@item.StudioDescription</p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p><b>Location: </b>@item.City,@item.State @item.ZipCode</p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p><b>Studio Price: </b>$@item.StudioPrice/hr</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ActionLink("Click here for more info.", "Details", "Studios", new {id=item.ID})
                         </div>
                     </div>
 
