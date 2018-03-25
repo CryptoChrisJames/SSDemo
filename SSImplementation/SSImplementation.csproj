@@ -8,13 +8,9 @@
 
   <ItemGroup>
     <Compile Remove="NewFolder1\**" />
-    <Compile Remove="NewFolder\**" />
     <Content Remove="NewFolder1\**" />
-    <Content Remove="NewFolder\**" />
     <EmbeddedResource Remove="NewFolder1\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
     <None Remove="NewFolder1\**" />
-    <None Remove="NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +24,9 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.6.362" />
+    <PackageReference Include="jQuery" Version="3.3.1" />
+    <PackageReference Include="jQuery.UI" Version="1.12.1.1" />
+    <PackageReference Include="jQuery.UI.Widgets.Datepicker" Version="1.8.9" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
@@ -53,8 +52,15 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="NewFolder\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Scripts\" />
+    <Folder Include="Views\Booking\" />
     <Folder Include="wwwroot\StudioPictures\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\DatePickerReady.js" />
   </ItemGroup>
 
 </Project>

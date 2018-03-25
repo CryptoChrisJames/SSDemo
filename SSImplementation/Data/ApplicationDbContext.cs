@@ -25,5 +25,6 @@ namespace SSImplementation.Data
 
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Studio> StudioListings { get; set; }
+        public DbSet<SSImplementation.Models.Booking> Booking { get; set; }
     }
 }

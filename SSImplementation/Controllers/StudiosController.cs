@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSImplementation.Data;
 using SSImplementation.Models;
+using SSImplementation.Models.ViewModels;
 
 namespace SSImplementation.Controllers
 {
@@ -31,13 +32,18 @@ namespace SSImplementation.Controllers
         // GET: Studios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(User);
             var SelectedStudio = await _context.StudioListings
                 .SingleOrDefaultAsync(m => m.ID == id);
             SelectedStudio.User = await _context.Users
                 .SingleOrDefaultAsync(m => m.StudioID == SelectedStudio.ID);
             SelectedStudio.User.Profile = await _context.Profiles
                 .SingleOrDefaultAsync(m => m.User == SelectedStudio.User);
-            return View(SelectedStudio);
+            StudioListingAndBookingViewModel SLAB = new StudioListingAndBookingViewModel();
+            SLAB.StudioBeingBooked = SelectedStudio;
+            SLAB.UserBooking = currentUser.Profile;
+            SLAB.Booking = new Booking();
+            return View(SLAB);
         }
 
         
