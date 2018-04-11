@@ -9,6 +9,6 @@ namespace SSImplementation.Models.ViewModels
     {
         public Studio StudioBeingBooked { get; set; }
         public Profile UserBooking { get; set; }
-        public Booking Booking { get; set; }
+        public Booking BookingTransaction { get; set; }
     }
 }

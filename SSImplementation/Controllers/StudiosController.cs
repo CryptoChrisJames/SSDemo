@@ -42,7 +42,7 @@ namespace SSImplementation.Controllers
             StudioListingAndBookingViewModel SLAB = new StudioListingAndBookingViewModel();
             SLAB.StudioBeingBooked = SelectedStudio;
             SLAB.UserBooking = currentUser.Profile;
-            SLAB.Booking = new Booking();
+            SLAB.BookingTransaction = new Booking(); 
             return View(SLAB);
         }
 

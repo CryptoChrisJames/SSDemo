@@ -1,15 +1,19 @@
 @model SSImplementation.Models.ViewModels.StudioListingAndBookingViewModel
-
-
 @{
     Layout = "~/Views/Shared/_LayoutListings.cshtml";
 }
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="~/js/DatePickerReady.js"></script>
+<script src="~/js/CalculateBookingCost.js"></script>
+
+<script type="text/javascript">
+    var PricePerHour = @Model.StudioBeingBooked.PricePerHour;
+    var ProfileObject = @Model.UserBooking;
+    var StudioObject = @Model.StudioBeingBooked;
+</script>
 
 <div align="center">
     <h1>@Model.StudioBeingBooked.StudioName</h1>
@@ -44,14 +48,23 @@
                     <p>Number of rooms: @Model.StudioBeingBooked.numberOfRooms</p>
                 </div>
                 <div class="col-lg-6">
-                    <input id="DateOfBooking" asp-for="@Model.Booking.DateOfBooking" />
-                    <span asp-validation-for="@Model.Booking.DateOfBooking" class="text-danger"></span>
+                    <h2>Studio Price (hourly): $@Model.StudioBeingBooked.PricePerHour</h2>
+                    <form id="BookingInput" asp-controller="Bookings" asp-action="ConfirmBooking">
+                        <input id="DateOfBooking" asp-for="@Model.BookingTransaction.ReservationDate" />
+                        <span asp-validation-for="@Model.BookingTransaction.ReservationDate" class="text-danger"></span>
 
-                    <select id="BookingTime1" asp-for="@Model.Booking.BookingStartTime"
-                            asp-items="@Html.GetEnumSelectList<SSImplementation.Models.BookingTimes>()"></select>
+                        <select id="BookingTime1" asp-for="@Model.BookingTransaction.BookingStartTime"
+                                asp-items="@Html.GetEnumSelectList<SSImplementation.Models.BookingTimes>()"></select>
 
-                    <select id="BookingTime2" asp-for="@Model.Booking.BookingStartTime"
-                            asp-items="@Html.GetEnumSelectList<SSImplementation.Models.BookingTimes>()"></select>
+                        <select id="BookingTime2" asp-for="@Model.BookingTransaction.BookingEndTime"
+                                asp-items="@Html.GetEnumSelectList<SSImplementation.Models.BookingTimes>()"></select>
+                        @Html.HiddenFor(x => x.BookingTransaction.FinalCost)
+                        @Html.HiddenFor(x => x.BookingTransaction.AmountofTimeBooked)
+                        @Html.HiddenFor(x => x.BookingTransaction.StudioBooked)
+                        @Html.HiddenFor(x => x.BookingTransaction.ProfileMakingReservation)
+                        <div id="TotalPrice"></div>
+                        <div id="SubmitButton"></div>
+                    </form>
                 </div>
             </div>
         </div>

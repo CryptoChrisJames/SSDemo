@@ -55,7 +55,6 @@
     <Folder Include="NewFolder\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Views\Booking\" />
     <Folder Include="wwwroot\StudioPictures\" />
   </ItemGroup>
 

@@ -15,7 +15,8 @@
         <h2>Your Premiere Audio Studio Listings Provider</h2>
     </div>
     <div class="row" style="padding-bottom:2em;" >
-        @{await Html.RenderPartialAsync("/Views/Home/Search.cshtml", new SSImplementation.Models.ViewModels.SearchStudioViewModel());}
+        @{await Html.RenderPartialAsync("/Views/Home/Search.cshtml", 
+              new SSImplementation.Models.ViewModels.SearchStudioViewModel());}
     </div>
     <div class="clear"></div>
     <div class="container-fluid" id="carousel" style="padding-top:4em">

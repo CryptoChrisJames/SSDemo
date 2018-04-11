@@ -48,7 +48,7 @@ namespace SSImplementation.Models
         public int BookingEndTime { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime DateOfBooking { get; set; }
+        public DateTime ReservationDate { get; set; }
 
         public DateTime DateReservationWasMade { get; set; } 
         public int AmountofTimeBooked { get; set; }
@@ -57,47 +57,6 @@ namespace SSImplementation.Models
         public Studio StudioBooked { get; set; }
         public Profile ProfileMakingReservation { get; set; }
         public StatusType Status { get; set; }
-
-        public IEnumerable<SelectListItem> GetSelectListItems()
-        {
-            var selectList = new List<SelectListItem>();
-
-            // Get all values of the BookingTimes enum
-            var enumValues = Enum.GetValues(typeof(BookingTimes)) as BookingTimes[];
-            if (enumValues == null)
-                return null;
-
-            foreach (var enumValue in enumValues)
-            {
-                // Create a new SelectListItem element and set its 
-                // Value and Text to the enum value and description.
-                selectList.Add(new SelectListItem
-                {
-                    Value = enumValue.ToString(),
-                    // GetBookingTimesName just returns the Display.Name value
-                    // of the enum - check out the next chapter for the code of this function.
-                    Text = GetBookingTimesName(enumValue)
-                });
-            }
-
-            return selectList;
-        }
-
-        public string GetBookingTimesName(BookingTimes value)
-        {
-            // Get the MemberInfo object for supplied enum value
-            var memberInfo = value.GetType().GetMember(value.ToString());
-            if (memberInfo.Length != 1)
-                return null;
-
-            // Get DisplayAttibute on the supplied enum value
-            var displayAttribute = memberInfo[0].GetCustomAttributes(typeof(DisplayAttribute), false)
-                                   as DisplayAttribute[];
-            if (displayAttribute == null || displayAttribute.Length != 1)
-                return null;
-
-            return displayAttribute[0].Name;
-        }
-
+        
     }
 }
