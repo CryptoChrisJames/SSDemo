@@ -54,10 +54,9 @@ namespace SSImplementation.Models
         public DateTime DateReservationWasMade { get; set; } 
         public int AmountofTimeBooked { get; set; }
         public int FinalCost { get; set; }
-        public int ConfirmationNumber { get; set; }
+        public string ConfirmationNumber { get; set; }
         public string StudioUserID { get; set; }
         public string BookingUserID { get; set; }
         public StatusType Status { get; set; }
-        
     }
 }

@@ -34,7 +34,8 @@
 
                         <input id="BookingTime1" type="hidden" asp-for="@Model.newBooking.BookingStartTime" 
                                 value ="@Model.newBooking.BookingStartTime" />
-
+                        <input type="hidden" asp-for="@Model.newBooking.Status"
+                               value="@Model.newBooking.Status" />
                         <input id="BookingTime2" type="hidden" asp-for="@Model.newBooking.BookingEndTime" 
                                 value="@Model.newBooking.BookingEndTime" />
                         <input id="StudioUserID" type="hidden"
@@ -48,6 +49,8 @@
                                value="@Model.newBooking.AmountofTimeBooked"/>
                         <input id="currentUser" type="hidden" asp-for="@Model.newBooking.BookingUserID"
                                value="@Model.currentUser.Id"/>
+                        <input type="hidden" asp-for="@Model.newBooking.DateReservationWasMade"
+                               value="@Model.newBooking.DateReservationWasMade" />
                         <input type="submit" value="Confirm" class="btn btn-default" />
                     }
                     <br/>

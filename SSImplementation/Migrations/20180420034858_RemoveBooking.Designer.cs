@@ -9,9 +9,10 @@ using SSImplementation.Models;
 namespace SSImplementation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180420034858_RemoveBooking")]
+    partial class RemoveBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -197,7 +198,7 @@ namespace SSImplementation.Migrations
 
                     b.Property<string>("BookingUserID");
 
-                    b.Property<string>("ConfirmationNumber");
+                    b.Property<int>("ConfirmationNumber");
 
                     b.Property<DateTime>("DateReservationWasMade");
 

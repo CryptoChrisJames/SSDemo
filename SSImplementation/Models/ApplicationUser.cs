@@ -16,8 +16,5 @@ namespace SSImplementation.Models
         [ForeignKey("Studio")]
         public int StudioID { get; set; }
         public Studio Studio { get; set; }
-        [ForeignKey("Booking")]
-        public int BookingID { get; set; }
-        public Booking Incoming { get; set; }
     }
 }

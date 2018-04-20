@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SSImplementation.Data;
 using SSImplementation.Models;
 using Microsoft.AspNetCore.Identity;
+using SSImplementation.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
@@ -45,9 +46,23 @@ namespace SSImplementation.Controllers
         }
         public async Task<IActionResult> ProcessBooking(Booking newBooking)
         {
+            newBooking.ConfirmationNumber =  BookingConfirmation();
+            _context.Add(newBooking);
+            await _context.SaveChangesAsync();
+            return View(newBooking);
+        }
 
+        private string BookingConfirmation()
+        {
 
-            return View();
+            Random random = new Random();
+            string cnum = "";
+            int i;
+            for (i = 1; i < 11; i++)
+            {
+                cnum += random.Next(0, 9).ToString();
+            }
+            return cnum;
         }
     }
 }

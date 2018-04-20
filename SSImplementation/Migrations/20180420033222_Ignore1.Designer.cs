@@ -9,9 +9,10 @@ using SSImplementation.Models;
 namespace SSImplementation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180420033222_Ignore1")]
+    partial class Ignore1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -131,6 +132,8 @@ namespace SSImplementation.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<int>("BookingID");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -168,6 +171,8 @@ namespace SSImplementation.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BookingID");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -197,7 +202,7 @@ namespace SSImplementation.Migrations
 
                     b.Property<string>("BookingUserID");
 
-                    b.Property<string>("ConfirmationNumber");
+                    b.Property<int>("ConfirmationNumber");
 
                     b.Property<DateTime>("DateReservationWasMade");
 
@@ -325,6 +330,11 @@ namespace SSImplementation.Migrations
 
             modelBuilder.Entity("SSImplementation.Models.ApplicationUser", b =>
                 {
+                    b.HasOne("SSImplementation.Models.Booking", "Incoming")
+                        .WithMany()
+                        .HasForeignKey("BookingID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("SSImplementation.Models.Profile", "Profile")
                         .WithOne("User")
                         .HasForeignKey("SSImplementation.Models.ApplicationUser", "ProfileID")
