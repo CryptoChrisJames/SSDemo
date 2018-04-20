@@ -10,46 +10,45 @@
 <script src="~/js/CalculateBookingCost.js"></script>
 
 <script type="text/javascript">
-    var PricePerHour = @Model.StudioBeingBooked.PricePerHour;
-    var ProfileObject = @Model.UserBooking;
-    var StudioObject = @Model.StudioBeingBooked;
+    var PricePerHour = @Model.StudioBeingBooked.Studio.PricePerHour;
 </script>
 
+
 <div align="center">
-    <h1>@Model.StudioBeingBooked.StudioName</h1>
+    <h1>@Model.StudioBeingBooked.Studio.StudioName</h1>
     <br />
     <img class="StudioListingPagePicture"
-         src="~/StudioPictures/@Model.StudioBeingBooked.User.Id/@Model.StudioBeingBooked.pictureOfRoom" />
-    <p><b>Studio Type: @Html.DisplayFor(Model => Model.StudioBeingBooked.Type)</b></p>
+         src="~/StudioPictures/@Model.StudioBeingBooked.Studio.User.Id/@Model.StudioBeingBooked.Studio.pictureOfRoom" />
+    <p><b>Studio Type: @Html.DisplayFor(Model => Model.StudioBeingBooked.Studio.Type)</b></p>
     <div>
         <div class="row">
             <div class="container">
                 <div class="col-lg-6">
                     <h2>Owner</h2>
-                    <p>@Model.StudioBeingBooked.User.Profile.DisplayName</p>
+                    <p>@Model.StudioBeingBooked.Studio.User.Profile.DisplayName</p>
                     <h2>
                         Studio Description
                     </h2>
-                    <p>@Model.StudioBeingBooked.ListingDescription</p>
+                    <p>@Model.StudioBeingBooked.Studio.ListingDescription</p>
                     <h2>
                         Location
                     </h2>
-                    <p>@Model.StudioBeingBooked.Address</p>
-                    <p>@Model.StudioBeingBooked.City,@Model.StudioBeingBooked.State  @Model.StudioBeingBooked.ZipCode</p>
+                    <p>@Model.StudioBeingBooked.Studio.Address</p>
+                    <p>@Model.StudioBeingBooked.Studio.City,@Model.StudioBeingBooked.Studio.State  @Model.StudioBeingBooked.Studio.ZipCode</p>
                     <h2>
                         Price
                     </h2>
-                    <p>$@Model.StudioBeingBooked.PricePerHour/hr</p>
-                    <p>Cancellation fee: $@Model.StudioBeingBooked.CancellationFee</p>
+                    <p>$@Model.StudioBeingBooked.Studio.PricePerHour/hr</p>
+                    <p>Cancellation fee: $@Model.StudioBeingBooked.Studio.CancellationFee</p>
                     <h2>
                         Miscellaneous
                     </h2>
-                    <p>Studio Rules: @Model.StudioBeingBooked.StudioRules</p>
-                    <p>Number of rooms: @Model.StudioBeingBooked.numberOfRooms</p>
+                    <p>Studio Rules: @Model.StudioBeingBooked.Studio.StudioRules</p>
+                    <p>Number of rooms: @Model.StudioBeingBooked.Studio.numberOfRooms</p>
                 </div>
                 <div class="col-lg-6">
-                    <h2>Studio Price (hourly): $@Model.StudioBeingBooked.PricePerHour</h2>
-                    <form id="BookingInput" asp-controller="Bookings" asp-action="ConfirmBooking">
+                    <h2>Studio Price (hourly): $@Model.StudioBeingBooked.Studio.PricePerHour</h2>
+                    <form id="BookingInput" asp-controller="Booking" asp-action="ConfirmBooking">
                         <input id="DateOfBooking" asp-for="@Model.BookingTransaction.ReservationDate" />
                         <span asp-validation-for="@Model.BookingTransaction.ReservationDate" class="text-danger"></span>
 
@@ -58,10 +57,13 @@
 
                         <select id="BookingTime2" asp-for="@Model.BookingTransaction.BookingEndTime"
                                 asp-items="@Html.GetEnumSelectList<SSImplementation.Models.BookingTimes>()"></select>
-                        @Html.HiddenFor(x => x.BookingTransaction.FinalCost)
-                        @Html.HiddenFor(x => x.BookingTransaction.AmountofTimeBooked)
-                        @Html.HiddenFor(x => x.BookingTransaction.StudioBooked)
-                        @Html.HiddenFor(x => x.BookingTransaction.ProfileMakingReservation)
+                        <input id="StudioUserID" type="hidden"
+                               asp-for="@Model.BookingTransaction.StudioUserID"
+                               value="@Model.BookingTransaction.StudioUserID" />
+                        <input id="FinalCost" type="hidden"
+                               asp-for="@Model.BookingTransaction.FinalCost" />
+                        <input id="AmountofTimeBooked" type="hidden"
+                               asp-for="@Model.BookingTransaction.AmountofTimeBooked" />
                         <div id="TotalPrice"></div>
                         <div id="SubmitButton"></div>
                     </form>

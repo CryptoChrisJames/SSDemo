@@ -38,11 +38,13 @@ namespace SSImplementation.Controllers
             SelectedStudio.User = await _context.Users
                 .SingleOrDefaultAsync(m => m.StudioID == SelectedStudio.ID);
             SelectedStudio.User.Profile = await _context.Profiles
-                .SingleOrDefaultAsync(m => m.User == SelectedStudio.User);
+                .SingleOrDefaultAsync(m => m.User.Id == SelectedStudio.User.Id);
             StudioListingAndBookingViewModel SLAB = new StudioListingAndBookingViewModel();
-            SLAB.StudioBeingBooked = SelectedStudio;
-            SLAB.UserBooking = currentUser.Profile;
-            SLAB.BookingTransaction = new Booking(); 
+            SLAB.StudioBeingBooked = SelectedStudio.User;
+            SLAB.UserBooking = currentUser;
+            SLAB.BookingTransaction = new Booking();
+            SLAB.BookingTransaction.StudioUserID = SLAB.StudioBeingBooked.Id;
+            SLAB.BookingTransaction.BookingUserID = SLAB.UserBooking.Id;
             return View(SLAB);
         }
 

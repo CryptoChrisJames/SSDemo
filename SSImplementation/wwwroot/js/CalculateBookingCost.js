@@ -12,12 +12,9 @@
 
         else {
             var TotalPrice = ttotal * PricePerHour
-            $("#FinalCost").val(TotalPrice)
-            $("#AmountofTimeBooked").val(ttotal)
-            $("#StudioBooked").val(StudioObject)
-            $("#ProfileMakingReservation").val(ProfileObject)
+            $("#FinalCost").attr("value", TotalPrice)
+            $("#AmountofTimeBooked").attr("value", ttotal)
             $("#TotalPrice").html("<h1>Price To Book: $" + TotalPrice)
-            debugger;
             $("#SubmitButton").html("<input type='submit' value='Book This Time!' id='ConfirmBooking' class='btn btn-default'/>")
         }
     })

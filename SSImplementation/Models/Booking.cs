@@ -43,6 +43,7 @@ namespace SSImplementation.Models
     
     public class Booking
     {
+
         public int ID { get; set; }
         public int BookingStartTime { get; set; }
         public int BookingEndTime { get; set; }
@@ -54,8 +55,8 @@ namespace SSImplementation.Models
         public int AmountofTimeBooked { get; set; }
         public int FinalCost { get; set; }
         public int ConfirmationNumber { get; set; }
-        public Studio StudioBooked { get; set; }
-        public Profile ProfileMakingReservation { get; set; }
+        public string StudioUserID { get; set; }
+        public string BookingUserID { get; set; }
         public StatusType Status { get; set; }
         
     }

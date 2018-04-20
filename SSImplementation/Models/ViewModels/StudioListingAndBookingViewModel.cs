@@ -7,8 +7,8 @@ namespace SSImplementation.Models.ViewModels
 {
     public class StudioListingAndBookingViewModel
     {
-        public Studio StudioBeingBooked { get; set; }
-        public Profile UserBooking { get; set; }
+        public ApplicationUser StudioBeingBooked { get; set; }
+        public ApplicationUser UserBooking { get; set; }
         public Booking BookingTransaction { get; set; }
     }
 }
