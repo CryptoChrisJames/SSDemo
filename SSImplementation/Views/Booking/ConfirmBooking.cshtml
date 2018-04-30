@@ -24,7 +24,7 @@
                     <div style="padding-top:2em;"></div>
                     <img id="DashboardProfilePicture"
                          src="~/StudioPictures/@Model.userBeingBooked.Id/@Model.userBeingBooked.Studio.pictureOfRoom" />
-                    <div><h2> Final Price: @Model.newBooking.FinalCost</h2></div>
+                    <div><h2> Final Price: $@Model.newBooking.FinalCost</h2></div>
                     @using (Html.BeginForm("ProcessBooking", "Booking", FormMethod.Post, Model.newBooking))
                     {
 

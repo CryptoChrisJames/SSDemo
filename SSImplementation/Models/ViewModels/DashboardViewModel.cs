@@ -9,5 +9,7 @@ namespace SSImplementation.Models.ViewModels
     {
         public Profile ProfileData { get; set; }
         public Studio StudioData { get; set; }
-    }
+        public IList<Booking> IncomingBookings { get; set; }
+        public IList<Booking> OutgoingBookings { get; set; }
+     }
 }

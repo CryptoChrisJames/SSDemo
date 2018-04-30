@@ -57,6 +57,8 @@ namespace SSImplementation.Models
         public string ConfirmationNumber { get; set; }
         public string StudioUserID { get; set; }
         public string BookingUserID { get; set; }
+        public Profile profileBooking { get; set; }
+        public Studio studioBooked { get; set; }
         public StatusType Status { get; set; }
     }
 }

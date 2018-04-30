@@ -1,5 +1,6 @@
 ﻿@model SSImplementation.Models.ViewModels.DashboardViewModel
 
+
 @{ 
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
@@ -36,12 +37,79 @@
                         Studio Time
                     </div>
                     <div class="panel-body">
-                        <h4>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        @if(Model.OutgoingBookings.Count == 0 && Model.IncomingBookings.Count == 0)
+                        {
+                            
+                        <h4 align="center">
+                            You currently have no booked studio time. 
                         </h4>
+
+                        }
+                        @if(Model.OutgoingBookings.Count != 0)
+                        {
+                            <table class="ListingTable" align="center">
+                                    <caption><h1 align="cetner">Booked Appoinments</h1></caption>
+                            @foreach(var item in Model.OutgoingBookings)
+                            {
+                                
+                                
+                                    <tr align="center">
+                                        <td>
+                                            @item.studioBooked.StudioName
+                                        </td>
+                                        <td>
+                                            <P align="center">@item.studioBooked.Address</P>
+                                            <p align="center">@item.studioBooked.City, @item.studioBooked.State</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">$@item.FinalCost</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.BookingStartTime to @item.BookingEndTime</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.ReservationDate</p>
+                                        </td>
+                                    </tr>
+
+                            }
+                                
+                                
+                            </table>
+
+                        }
+                        @if(Model.IncomingBookings.Count != 0)
+                        {
+                                <table class="ListingTable" align="center">
+                                    <caption><h1>Time Booked</h1></caption>
+                                    @foreach(var item in Model.IncomingBookings)
+                                    {
+
+
+                                    <tr align="center">
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            @item.profileBooking.DisplayName
+                                        </td>
+                                        <td>
+                                            @item.profileBooking.FirstName @item.profileBooking.LastName
+                                        </td>
+                                        <td>
+                                            <p align="center">$@item.FinalCost</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.BookingStartTime to @item.BookingEndTime</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.ReservationDate</p>
+                                        </td>
+                                    </tr>
+                                    }
+                                </table>
+
+                        }
                     </div>
                 </div>
                 <div class="panel">

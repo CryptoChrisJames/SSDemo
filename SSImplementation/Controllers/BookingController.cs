@@ -25,8 +25,9 @@ namespace SSImplementation.Controllers
             _context = context;
             _userManager = userManager;
         }
-
-        // GET: Booking/ConfirmBooking
+        
+        [AutoValidateAntiforgeryToken]
+        // POST: Booking/ConfirmBooking
         public async Task<IActionResult> ConfirmBooking(StudioListingAndBookingViewModel SLAB)
         {
             BookingConfirmation newBookingConfirmation = new BookingConfirmation();
@@ -44,12 +45,21 @@ namespace SSImplementation.Controllers
                 .SingleOrDefaultAsync(x => x.User.Id == newBookingConfirmation.newBooking.StudioUserID);
             return View(newBookingConfirmation);
         }
+
+
+        [ValidateAntiForgeryToken]
+        //GET: Booking/ProcessBooking
         public async Task<IActionResult> ProcessBooking(Booking newBooking)
         {
-            newBooking.ConfirmationNumber =  BookingConfirmation();
+            newBooking.ConfirmationNumber = BookingConfirmation();
             _context.Add(newBooking);
             await _context.SaveChangesAsync();
-            return View(newBooking);
+            return RedirectToAction(nameof(BookingController.BookingSuccessful), "Booking", newBooking);
+        }
+
+        public async Task<IActionResult> BookingSuccessful(Booking confirmedBooking)
+        {
+            return View(confirmedBooking);
         }
 
         private string BookingConfirmation()

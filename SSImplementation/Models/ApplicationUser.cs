@@ -11,7 +11,7 @@ namespace SSImplementation.Models
     public class ApplicationUser : IdentityUser
     {
         [ForeignKey("Profile")]
-        public int ProfileID { get; set; }
+        public int  ProfileID { get; set; }
         public Profile Profile { get; set; }
         [ForeignKey("Studio")]
         public int StudioID { get; set; }
