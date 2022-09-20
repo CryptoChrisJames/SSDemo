@@ -40,9 +40,9 @@ namespace SSImplementation.Controllers
 
             newBookingConfirmation.currentUser = await _userManager.GetUserAsync(User);
             newBookingConfirmation.userBeingBooked = await _context.Users
-                .SingleOrDefaultAsync(x => x.Id == newBookingConfirmation.newBooking.StudioUserID);
+                .SingleOrDefaultAsync(x => x.Id.ToString() == newBookingConfirmation.newBooking.StudioUserID);
             newBookingConfirmation.userBeingBooked.Studio = await _context.StudioListings
-                .SingleOrDefaultAsync(x => x.User.Id == newBookingConfirmation.newBooking.StudioUserID);
+                .SingleOrDefaultAsync(x => x.User.Id.ToString() == newBookingConfirmation.newBooking.StudioUserID);
             return View(newBookingConfirmation);
         }
 

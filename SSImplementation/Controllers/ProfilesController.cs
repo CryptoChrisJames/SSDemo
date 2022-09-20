@@ -65,9 +65,9 @@ namespace SSImplementation.Controllers
                 if (ProfilePictureFile != null)
                 {
                     string uploadpath = Path.Combine(_environment.WebRootPath, "ProfilePictures");
-                    Directory.CreateDirectory(Path.Combine(uploadpath, currentUser.Id));
+                    Directory.CreateDirectory(Path.Combine(uploadpath, currentUser.Id.ToString()));
                     string filename = Path.GetFileName(ProfilePictureFile.FileName);
-                    using (FileStream fs = new FileStream(Path.Combine(uploadpath, currentUser.Id, filename), FileMode.Create))
+                    using (FileStream fs = new FileStream(Path.Combine(uploadpath, currentUser.Id.ToString(), filename), FileMode.Create))
                     {
                         await ProfilePictureFile.CopyToAsync(fs);
                     }

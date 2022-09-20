@@ -66,7 +66,7 @@ namespace SSImplementation.Controllers
                           StudioPrice = p.PricePerHour,
                           StudioPicture = p.pictureOfRoom,
                           StudioDescription = p.ListingDescription,
-                          UserID = p.User.Id,
+                          UserID = p.User.Id.ToString(),
                           ZipCode=p.ZipCode,
                       }
                       ).ToList();

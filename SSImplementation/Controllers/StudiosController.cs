@@ -43,8 +43,8 @@ namespace SSImplementation.Controllers
             SLAB.StudioBeingBooked = SelectedStudio.User;
             SLAB.UserBooking = currentUser;
             SLAB.BookingTransaction = new Booking();
-            SLAB.BookingTransaction.StudioUserID = SLAB.StudioBeingBooked.Id;
-            SLAB.BookingTransaction.BookingUserID = SLAB.UserBooking.Id;
+            SLAB.BookingTransaction.StudioUserID = SLAB.StudioBeingBooked.Id.ToString();
+            SLAB.BookingTransaction.BookingUserID = SLAB.UserBooking.Id.ToString();
             return View(SLAB);
         }
 
@@ -74,9 +74,9 @@ namespace SSImplementation.Controllers
                 if (StudioPictureFile!= null)
                 {
                     string uploadpath = Path.Combine(_environment.WebRootPath, "StudioPictures");
-                    Directory.CreateDirectory(Path.Combine(uploadpath, currentUser.Id));
+                    Directory.CreateDirectory(Path.Combine(uploadpath, currentUser.Id.ToString()));
                     string filename = Path.GetFileName(StudioPictureFile.FileName);
-                    using (FileStream fs = new FileStream(Path.Combine(uploadpath, currentUser.Id, filename), FileMode.Create))
+                    using (FileStream fs = new FileStream(Path.Combine(uploadpath, currentUser.Id.ToString(), filename), FileMode.Create))
                     {
                         await StudioPictureFile.CopyToAsync(fs);
                     }
