@@ -1,0 +1,31 @@
+@model SSImplementation.Models.Booking
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+
+    }
+</script>
+<body onload="noBack">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4" align="justify">
+                <h2>Thank you for booking with us!</h2>
+                <p style="position:center">
+                    Your appointment has been booked successfully. You should soon receive a notification about your appointment, or an update on your dashboard.
+                </p>
+                <br />
+                <h1>Your confirmation number is: @Model.ConfirmationNumber . Keep this number for your appointment.</h1>
+                <h5><a class="ConfirmLink" asp-action="Index" asp-controller="Dashboard">Click here to head back to the Dashboard.</a></h5>
+            </div>
+            <div class="col-lg-4"></div>
+
+        </div>
+
+    </div>
+</body>

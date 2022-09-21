@@ -1,0 +1,45 @@
+@model IList<SSImplementation.Models.ViewModels.ResultStudioViewModel>
+
+<div class="container-fluid" align="center">
+    <div class="page-header" align="center">
+        @if (Model.ToList() != null)
+        {
+            <h1 class="SearchResultAmount">We found @Model.ToList().Count listings in your area. </h1>
+        }
+        else
+        {
+            <h1 class="SearchResultAmount"> We did not find any listings in your area. </h1>
+
+        }
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+            <div class="Results">
+                @foreach(var item in Model)
+                {
+                    <div class="ResultContainer">
+                        <div class="ResultEntry">
+                            <h1>Name: <b>@item.StudioName</b></h1>
+                            <img class="SearchResultsPicture" src="~/StudioPictures/@item.UserID/@item.StudioPicture" />
+                            <div class="row">
+                                <div class="container-fluid">
+                                    <div class="col-sm-4">
+                                        <p><b>Description: </b>@item.StudioDescription</p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p><b>Location: </b>@item.City,@item.State @item.ZipCode</p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p><b>Studio Price: </b>$@item.StudioPrice/hr</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ActionLink("Click here for more info.", "Details", "Studios", new {id=item.ID})
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+@model SSImplementation.Models.ViewModels.StudioListingAndBookingViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutListings.cshtml";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/js/DatePickerReady.js"></script>
+<script src="~/js/CalculateBookingCost.js"></script>
+
+<script type="text/javascript">
+    var PricePerHour = @Model.StudioBeingBooked.Studio.PricePerHour;
+</script>
+
+
+<div align="center">
+    <h1>@Model.StudioBeingBooked.Studio.StudioName</h1>
+    <br />
+    <img class="StudioListingPagePicture"
+         src="~/StudioPictures/@Model.StudioBeingBooked.Studio.User.Id/@Model.StudioBeingBooked.Studio.pictureOfRoom" />
+    <p><b>Studio Type: @Html.DisplayFor(Model => Model.StudioBeingBooked.Studio.Type)</b></p>
+    <div>
+        <div class="row">
+            <div class="container">
+                <div class="col-lg-6">
+                    <h2>Owner</h2>
+                    <p>@Model.StudioBeingBooked.Studio.User.Profile.DisplayName</p>
+                    <h2>
+                        Studio Description
+                    </h2>
+                    <p>@Model.StudioBeingBooked.Studio.ListingDescription</p>
+                    <h2>
+                        Location
+                    </h2>
+                    <p>@Model.StudioBeingBooked.Studio.Address</p>
+                    <p>@Model.StudioBeingBooked.Studio.City,@Model.StudioBeingBooked.Studio.State  @Model.StudioBeingBooked.Studio.ZipCode</p>
+                    <h2>
+                        Price
+                    </h2>
+                    <p>$@Model.StudioBeingBooked.Studio.PricePerHour/hr</p>
+                    <p>Cancellation fee: $@Model.StudioBeingBooked.Studio.CancellationFee</p>
+                    <h2>
+                        Miscellaneous
+                    </h2>
+                    <p>Studio Rules: @Model.StudioBeingBooked.Studio.StudioRules</p>
+                    <p>Number of rooms: @Model.StudioBeingBooked.Studio.numberOfRooms</p>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Studio Price (hourly): $@Model.StudioBeingBooked.Studio.PricePerHour</h2>
+                    <form id="BookingInput" asp-controller="Booking" asp-action="ConfirmBooking">
+                        <input id="DateOfBooking" asp-for="@Model.BookingTransaction.ReservationDate" />
+                        <span asp-validation-for="@Model.BookingTransaction.ReservationDate" class="text-danger"></span>
+
+                        <select id="BookingTime1" asp-for="@Model.BookingTransaction.BookingStartTime"
+                                asp-items="@Html.GetEnumSelectList<SSImplementation.Models.BookingTimes>()"></select>
+
+                        <select id="BookingTime2" asp-for="@Model.BookingTransaction.BookingEndTime"
+                                asp-items="@Html.GetEnumSelectList<SSImplementation.Models.BookingTimes>()"></select>
+                        <input id="StudioUserID" type="hidden"
+                               asp-for="@Model.BookingTransaction.StudioUserID"
+                               value="@Model.BookingTransaction.StudioUserID" />
+                        <input id="FinalCost" type="hidden"
+                               asp-for="@Model.BookingTransaction.FinalCost" />
+                        <input id="AmountofTimeBooked" type="hidden"
+                               asp-for="@Model.BookingTransaction.AmountofTimeBooked" />
+                        <div id="TotalPrice"></div>
+                        <div id="SubmitButton"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
