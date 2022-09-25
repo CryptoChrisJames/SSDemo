@@ -39,7 +39,7 @@ namespace SSImplementation.Controllers
             //Gather user incoming bookings. 
             List<Booking> UsersIncomingBookings = new List<Booking>();
             UsersIncomingBookings = (from p in _context.Booking
-                                     where p.StudioUserID == currentUser.Id
+                                     where p.StudioUserID == currentUser.Id.ToString()
                                      select new Booking
                                      {
                                          ID = p.ID,
@@ -58,7 +58,7 @@ namespace SSImplementation.Controllers
             //Gather user's outgoing bookings.
             List<Booking> UsersOutgoingBookings = new List<Booking>();
             UsersOutgoingBookings = (from p in _context.Booking
-                                     where p.BookingUserID == currentUser.Id
+                                     where p.BookingUserID == currentUser.Id.ToString()
                                      select new Booking
                                      {
                                          ID = p.ID,

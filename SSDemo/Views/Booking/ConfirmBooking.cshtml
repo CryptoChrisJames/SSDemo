@@ -1,0 +1,74 @@
+@model SSImplementation.Models.ViewModels.BookingConfirmation
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/js/ConfirmBookingScript1.js"></script>
+<script src="~/js/Months.js"></script>
+<script>
+    var StartTime = @Model.newBooking.BookingStartTime;
+    var EndTime = @Model.newBooking.BookingEndTime;
+    var Month = @Model.newBooking.ReservationDate.Month;
+</script>
+
+<div class="row">
+    <div class="container-fluid">
+        <div class="BookingConfirmation">
+            <div class="col-lg-6">
+                <div class="box">
+                    <div style="padding-top:2em;"></div>
+                    <img id="DashboardProfilePicture"
+                         src="~/StudioPictures/@Model.userBeingBooked.Id/@Model.userBeingBooked.Studio.pictureOfRoom" />
+                    <div><h2> Final Price: $@Model.newBooking.FinalCost</h2></div>
+                    @using (Html.BeginForm("ProcessBooking", "Booking", FormMethod.Post, Model.newBooking))
+                    {
+
+                        <input id="DateOfBooking"  type="hidden" asp-for="@Model.newBooking.ReservationDate"  
+                               value="@Model.newBooking.ReservationDate"/>
+                        <span asp-validation-for="@Model.newBooking.ReservationDate" class="text-danger"></span>
+
+                        <input id="BookingTime1" type="hidden" asp-for="@Model.newBooking.BookingStartTime" 
+                                value ="@Model.newBooking.BookingStartTime" />
+                        <input type="hidden" asp-for="@Model.newBooking.Status"
+                               value="@Model.newBooking.Status" />
+                        <input id="BookingTime2" type="hidden" asp-for="@Model.newBooking.BookingEndTime" 
+                                value="@Model.newBooking.BookingEndTime" />
+                        <input id="StudioUserID" type="hidden"
+                               asp-for="@Model.newBooking.StudioUserID"
+                               value="@Model.newBooking.StudioUserID" />
+                        <input id="FinalCost" type="hidden"
+                               asp-for="@Model.newBooking.FinalCost"
+                               value="@Model.newBooking.FinalCost"/>
+                        <input id="AmountofTimeBooked" type="hidden"
+                               asp-for="@Model.newBooking.AmountofTimeBooked" 
+                               value="@Model.newBooking.AmountofTimeBooked"/>
+                        <input id="currentUser" type="hidden" asp-for="@Model.newBooking.BookingUserID"
+                               value="@Model.currentUser.Id"/>
+                        <input type="hidden" asp-for="@Model.newBooking.DateReservationWasMade"
+                               value="@Model.newBooking.DateReservationWasMade" />
+                        <input type="submit" value="Confirm" class="btn btn-default" />
+                    }
+                    <br/>
+                    <a asp-action="Index" asp-controller="Home" style="color:#000000">Cancel Request</a>
+                </div>
+            </div>
+            <div class="col-lg-6 ">
+                <div>
+                    <h1>You have selected to book @Model.userBeingBooked.Studio.StudioName from:</h1>
+                </div>
+                <div >
+                    <p id="StartTime"></p>to<p id="EndTime"></p>on
+                    <h2>
+                        @Model.newBooking.ReservationDate.DayOfWeek, <span id="Month"></span>@Model.newBooking.ReservationDate.Day, @Model.newBooking.ReservationDate.Year
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,150 @@
+﻿@model SSImplementation.Models.ViewModels.DashboardViewModel
+
+
+@{ 
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+<div>
+    <div class="container-fluid">
+        <div id="DashboardColumns" class="row content">
+            <div class="col-sm-3">
+                @if (Model.ProfileData.ProfilePicture != null)
+                {
+                    <img id="DashboardProfilePicture" 
+                         src="~/ProfilePictures/@Model.ProfileData.User.Id/@Model.ProfileData.ProfilePicture"/>
+                }
+                else
+                { 
+                    <img id="DashboardProfilePicture" src="~/images/SiteImages/Man.png"/>
+                }
+                <div id="ViewProfileLink">
+                    <a asp-action="Details" asp-controller="Profiles">View Your Profile</a>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="panel ">
+                    <div class="panel-heading">
+                        Notifications
+                    </div>
+                    <div class="panel-body">
+                        <h4 align="center">No Notifications</h4>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        Studio Time
+                    </div>
+                    <div class="panel-body">
+                        @if(Model.OutgoingBookings.Count == 0 && Model.IncomingBookings.Count == 0)
+                        {
+                            
+                        <h4 align="center">
+                            You currently have no booked studio time. 
+                        </h4>
+
+                        }
+                        @if(Model.OutgoingBookings.Count != 0)
+                        {
+                            <table class="ListingTable" align="center">
+                                    <caption><h1 align="cetner">Booked Appoinments</h1></caption>
+                            @foreach(var item in Model.OutgoingBookings)
+                            {
+                                
+                                
+                                    <tr align="center">
+                                        <td>
+                                            @item.studioBooked.StudioName
+                                        </td>
+                                        <td>
+                                            <P align="center">@item.studioBooked.Address</P>
+                                            <p align="center">@item.studioBooked.City, @item.studioBooked.State</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">$@item.FinalCost</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.BookingStartTime to @item.BookingEndTime</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.ReservationDate</p>
+                                        </td>
+                                    </tr>
+
+                            }
+                                
+                                
+                            </table>
+
+                        }
+                        @if(Model.IncomingBookings.Count != 0)
+                        {
+                                <table class="ListingTable" align="center">
+                                    <caption><h1>Time Booked</h1></caption>
+                                    @foreach(var item in Model.IncomingBookings)
+                                    {
+
+
+                                    <tr align="center">
+                                        <td>
+                                            
+                                        </td>
+                                        <td>
+                                            @item.profileBooking.DisplayName
+                                        </td>
+                                        <td>
+                                            @item.profileBooking.FirstName @item.profileBooking.LastName
+                                        </td>
+                                        <td>
+                                            <p align="center">$@item.FinalCost</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.BookingStartTime to @item.BookingEndTime</p>
+                                        </td>
+                                        <td>
+                                            <p align="center">@item.ReservationDate</p>
+                                        </td>
+                                    </tr>
+                                    }
+                                </table>
+
+                        }
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        Listings
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.StudioData.pictureOfRoom == null)
+                        {
+                            <p align="center"> Your studio listing has not been setup yet.</p>
+                        }
+                        else
+                        {
+                            <table class="ListingTable" align="center">
+                                <tr align="center">
+                                    <td style="width:177px; height:auto;">
+                                        <img class="ListingTableImage"
+                                             src="~/StudioPictures/@Model.StudioData.User.Id/@Model.StudioData.pictureOfRoom" />
+                                    </td>
+                                    <td>
+                                        @Model.StudioData.StudioName
+                                    </td>
+                                    <td>
+                                        <P align="center">@Model.StudioData.Address</P>
+                                        <p align="center">@Model.StudioData.City, @Model.StudioData.State</p>
+                                    </td>
+                                    <td>
+                                        <p align="center">$@Model.StudioData.PricePerHour/hr</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
