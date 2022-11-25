@@ -24,7 +24,7 @@ namespace SSImplementation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
         {
-            string connectionString = env.IsDevelopment() ? "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;" : "Server=sql;Database=master;User=sa;Password=DEMOS123;";
+            string connectionString = env.IsDevelopment() ? "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;" : "Server=sql;Database=SSDemo;User=sa;Password=DEMOS123;";
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
