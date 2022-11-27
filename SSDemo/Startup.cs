@@ -20,17 +20,20 @@ namespace SSDemo
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         }
 
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment env { get; }
+        public string currentEnv { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var currentConnString = currentEnv == "Development" ? "DefaultConnection" : "Server=sql;Database=LNCDemo;User=sa;Password=DEMOS123;";
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString(currentConnString)));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -49,6 +52,14 @@ namespace SSDemo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if(currentEnv != "Development")
+            {
+                using (IServiceScope scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                }
+            }
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
