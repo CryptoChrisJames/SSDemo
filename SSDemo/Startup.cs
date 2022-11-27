@@ -28,7 +28,7 @@ namespace SSDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var currentConnString = env.IsDevelopment() ? "DefaultConnection" : "Server=sql;Database=LNCDemo;User=sa;Password=DEMOS123;";
+            var currentConnString = env.IsDevelopment() ? "DefaultConnection" : "Server=sql;Database=LNCDemo;User=sa;Password=Demos123!;";
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(currentConnString)));
