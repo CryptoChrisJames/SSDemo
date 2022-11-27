@@ -17,18 +17,19 @@ namespace SSDemo
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Env = env;
         }
 
         public IConfiguration Configuration { get; }
-        public IWebHostEnvironment env { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var currentConnString = env.IsDevelopment() ? "DefaultConnection" : "Server=sql;Database=LNCDemo;User=sa;Password=Demos123!;";
+            var currentConnString = Env.IsDevelopment() ? "DefaultConnection" : "Server=sql;Database=LNCDemo;User=sa;Password=Demos123!;";
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(currentConnString)));
@@ -50,7 +51,7 @@ namespace SSDemo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if(env.IsDevelopment())
+            if(Env.IsDevelopment())
             {
                 using (IServiceScope scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
