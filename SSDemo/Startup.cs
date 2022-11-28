@@ -33,7 +33,7 @@ namespace SSDemo
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Env.IsDevelopment() ?
                     Configuration.GetConnectionString("DefaultConnection") :
-                    "Server=sql;Database=LNCDemo;User=sa;Password=Demos123!;"));
+                    "Server=sql;Database=SSDemo;User=sa;Password=Demos123!;"));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
